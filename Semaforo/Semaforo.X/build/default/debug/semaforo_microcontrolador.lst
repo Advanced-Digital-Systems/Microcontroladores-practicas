@@ -1,4 +1,4 @@
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  1
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (list)
                       00034   CONFIG  BORV = 3              ; Brown-out Reset Voltage bits (Minimum setting 2.05V)
                       00035   CONFIG  VREGEN = OFF          ; USB Voltage Regulator Enable bit (USB voltage regulator disabled)
                       00036 
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  2
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             rom table reads executed in other blocks)
                       00077   CONFIG  EBTR2 = OFF           ; Table Read Protection bit (Block 2 (004000-005FFFh) is not protected f
                             rom table reads executed in other blocks)
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  3
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -129,127 +129,126 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00081   CONFIG  EBTRB = OFF           ; Boot Block Table Read Protection bit (Boot block (000000-0007FFh) is n
                             ot protected from table reads executed in other blocks)
                       00082 ;****************Variables Definition*********************************
-  00000020            00083 GREENL          EQU     0x20
-  00000021            00084 YELLOWL         EQU     0x21
-  00000022            00085 REDL            EQU     0x22
-  00000023            00086 BUT             EQU     0x23
+  00000014            00083 DURACIONVERDE           EQU     0x14
+  00000015            00084 DURACIONAMARILLO        EQU     0x15
+  00000016            00085 DURACIONROJO            EQU     0x16
+  00000017            00086 DURACIONBOTON           EQU     0x17
                       00087 ;****************Main code*****************************
                       00088 
                       00089                 ORG     0x000           ; reset vector
 000000 EF?? F???      00090                 GOTO    MAIN            ; go to the main routine
                       00091 
 000004                00092 INITIALIZE:
-000004 8094           00093                 BSF     TRISC,  0       ; RC0 is input
-000006 0E80           00094                 MOVLW   b'10000000'     ; Timer0 of .524288 sec
-000008 6ED5           00095                 MOVWF   T0CON           ; Configure Timer0.
-00000A 6A95           00096                 CLRF    TRISD           ; Port D is an Output
-00000C 0E15           00097                 MOVLW   15              ; 15 times half a second for GREEN
-00000E 6E20           00098                 MOVWF   GREENL          ; Saves the value
-000010 0E02           00099                 MOVLW   2               ; 2 times half a second for YELLOW
-000012 6E21           00100                 MOVWF   YELLOWL         ; Saves the value
-000014 0E09           00101                 MOVLW   9               ; 9 times half a second for RED
-000016 6E22           00102                 MOVWF   REDL            ; Saves the value
-000018 0E11           00103                 MOVLW   b'00010001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-00001A 6E83           00104                 MOVWF   PORTD           ; Saves the value in Port D
-00001C 0E03           00105                 MOVLW   3               ; 3 button pushes
-00001E 6E23           00106                 MOVWF   BUT             ; Saves the value
-000020 EF?? F???      00107                 GOTO    GREEN           ; Initialice GREEN loop
+000004 8094           00093                 BSF     TRISC,  0       ; RC0 es input
+000006 0E80           00094                 MOVLW   b'10000000'     ; Timer0 de .524288 sec
+000008 6ED5           00095                 MOVWF   T0CON           ; Habilita TOCON(timer0)
+00000A 6A95           00096                 CLRF    TRISD           ; PortD output
+00000C 0E15           00097                 MOVLW   15              ; Duracion del led verde
+00000E 6E14           00098                 MOVWF   DURACIONVERDE           ; Guarda el valor
+000010 0E02           00099                 MOVLW   2               ; Duracion del led amarillo
+000012 6E15           00100                 MOVWF   DURACIONAMARILLO                ; Guarda el valor
+000014 0E09           00101                 MOVLW   9               ; Duracion del led rojo
+000016 6E16           00102                 MOVWF   DURACIONROJO            ; Guarda el valor
+000018 0E11           00103                 MOVLW   b'00010001'     ; _ _ _ verde amarillo rojo peaton no peaton
+00001A 6E83           00104                 MOVWF   PORTD           ; Guarda el valor in Port D
+00001C 0E03           00105                 MOVLW   3               ; 3 Duracion del boton presionado
+00001E 6E17           00106                 MOVWF   DURACIONBOTON           ; Guarda el valor
+000020 EF?? F???      00107                 GOTO    SEMAFOROVERDE           ; Inicializa SEMAFOROVERDE loop
                       00108 
 000024 EC?? F???      00109 MAIN:           CALL    INITIALIZE
-                      00110     
-000028                00111 GREEND:
-000028 2E20           00112                 DECFSZ  GREENL          ; Subtracts one to GREEN
-00002A EF?? F???      00113                 GOTO    GREEN           ; Keeps the GREEN cycle
-00002E 0E03           00114 GREENB:         MOVLW   3               ; 20 times half a second for GREEN
-000030 6E23           00115                 MOVWF   BUT             ; Saves the value
-000032 0E15           00116                 MOVLW   15              ; 20 times half a second for GREEN
-000034 6E20           00117                 MOVWF   GREENL          ; Saves the value
-000036 0E01           00118                 MOVLW   b'00000001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-000038 6E83           00119                 MOVWF   PORTD           ; Saves the value in Port D
-00003A EF?? F???      00120                 GOTO    BLINK           ; If 0, changes to BLINK
-                      00121                 
-00003E                00122 YELLOWD:
-00003E 2E21           00123                 DECFSZ  YELLOWL         ; Subtracts one to YELLLOW
-000040 EF?? F???      00124                 GOTO    YELLOW          ; Keeps the YELLOW cycle
-000044 0E02           00125                 MOVLW   2               ; 20 times half a second for YELLOW
-000046 6E21           00126                 MOVWF   YELLOWL         ; Saves the value
-000048 0E06           00127                 MOVLW   b'00000110'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-00004A 6E83           00128                 MOVWF   PORTD           ; Saves the value in Port D
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  4
+                      00110         
+000028                00111 SEMAFOROVERDE:  
+000028 B082           00112                 BTFSC   PORTC,0         ; If an imput was detected
+00002A EF?? F???      00113                 GOTO    BOTON           ; Button detection
+00002E A4F2           00114                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+000030 EF?? F???      00115                 GOTO    SEMAFOROVERDE           ; Loops the checking for Timer0
+000034 94F2           00116                 BCF     INTCON,2        ; Clears the timer's flag
+000036 EF?? F???      00117                 GOTO    DECREMENTOVERDE         ; Reduce iterations for VERDE
+00003A                00118 PARPADEO:
+00003A A4F2           00119                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+00003C EF?? F???      00120                 GOTO    PARPADEO                ; Loops the checking for Timer0
+000040 94F2           00121                 BCF     INTCON,2        ; Clears the timer's flag
+000042 0E11           00122                 MOVLW   b'00010001'     ; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+000044 6E83           00123                 MOVWF   PORTD           ; Guarda el valor in Port D
+000046                00124 PARPADEOPRENDIDO:
+000046 A4F2           00125                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+000048 EF?? F???      00126                 GOTO    PARPADEOPRENDIDO                ; Loops the checking for Timer0
+00004C 94F2           00127                 BCF     INTCON,2        ; Clears the timer's flag
+00004E 0E01           00128                 MOVLW   b'00000001'     ; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00004C EF?? F???      00129                 GOTO    RED             ; If 0, changes to RED
-                      00130                 
-000050                00131 REDD:
-000050 2E22           00132                 DECFSZ  REDL            ; Subtracts one to RED
-000052 EF?? F???      00133                 GOTO    RED             ; Keeps the RED cycle
-000056 0E09           00134                 MOVLW   9               ; 20 times half a second for RED
-000058 6E22           00135                 MOVWF   REDL            ; Saves the value
-00005A 0E11           00136                 MOVLW   b'00010001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-00005C 6E83           00137                 MOVWF   PORTD           ; Saves the value in Port D
-00005E EF?? F???      00138                 GOTO    GREEN           ; If 0, changes to GREEN
-                      00139                 
-                      00140                 ;LOOP;  
-                      00141                 
-000062                00142 GREEN:  
-000062 B082           00143                 BTFSC   PORTC,0         ; If an imput was detected
-000064 EF?? F???      00144                 GOTO    BUTTON          ; Button detection
-000068 A4F2           00145                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-00006A EF?? F???      00146                 GOTO    GREEN           ; Loops the checking for Timer0
-00006E 94F2           00147                 BCF     INTCON,2        ; Clears the timer's flag
-000070 EF?? F???      00148                 GOTO    GREEND          ; Reduce iterations for GREEN
-000074                00149 BLINK:
-000074 A4F2           00150                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-000076 EF?? F???      00151                 GOTO    BLINK           ; Loops the checking for Timer0
-00007A 94F2           00152                 BCF     INTCON,2        ; Clears the timer's flag
-00007C 0E11           00153                 MOVLW   b'00010001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-00007E 6E83           00154                 MOVWF   PORTD           ; Saves the value in Port D
-000080                00155 BLINKON:
-000080 A4F2           00156                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-000082 EF?? F???      00157                 GOTO    BLINKON         ; Loops the checking for Timer0
-000086 94F2           00158                 BCF     INTCON,2        ; Clears the timer's flag
-000088 0E01           00159                 MOVLW   b'00000001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-00008A 6E83           00160                 MOVWF   PORTD           ; Saves the value in Port D
-00008C                00161 BLINKOFF:
-00008C A4F2           00162                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-00008E EF?? F???      00163                 GOTO    BLINKOFF        ; Loops the checking for Timer0
-000092 94F2           00164                 BCF     INTCON,2        ; Clears the timer's flag
-000094 0E09           00165                 MOVLW   b'00001001'     ; _ _ _ GREEN YELLOW RED WALK NWALK
-000096 6E83           00166                 MOVWF   PORTD           ; Saves the value in Port D
-000098                00167 YELLOW:
-000098 A4F2           00168                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-00009A EF?? F???      00169                 GOTO    YELLOW          ; Loops the checking for Timer0
-00009E 94F2           00170                 BCF     INTCON,2        ; Clears the timer's flag
-0000A0 EF?? F???      00171                 GOTO    YELLOWD         ; Reduce iterations for YELLOW
-0000A4                00172 RED:
-0000A4 A4F2           00173                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-0000A6 EF?? F???      00174                 GOTO    RED             ; Loops the checking for Timer0
-0000AA 94F2           00175                 BCF     INTCON,2        ; Clears the timer's flag
-0000AC EF?? F???      00176                 GOTO    REDD            ; Reduce iterations for RED
-                      00177 
-0000B0                00178 BUTTON:
-0000B0 4E23           00179                 DCFSNZ  BUT             ; Subtracts one to BUT
-0000B2 EF?? F???      00180                 GOTO    GREENB          ; If 3 pushes, changes
-0000B6 A4F2           00181 BUTTONG:        BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  5
+000050 6E83           00129                 MOVWF   PORTD           ; Guarda el valor in Port D
+000052                00130 PARPADEOAPAGADO:
+000052 A4F2           00131                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+000054 EF?? F???      00132                 GOTO    PARPADEOAPAGADO ; Loops the checking for Timer0
+000058 94F2           00133                 BCF     INTCON,2        ; Clears the timer's flag
+00005A 0E09           00134                 MOVLW   b'00001001'     ; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+00005C 6E83           00135                 MOVWF   PORTD           ; Guarda el valor in Port D
+00005E                00136 SEMAFOROAMARILLO:
+00005E A4F2           00137                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+000060 EF?? F???      00138                 GOTO    SEMAFOROAMARILLO                ; Loops the checking for Timer0
+000064 94F2           00139                 BCF     INTCON,2        ; Clears the timer's flag
+000066 EF?? F???      00140                 GOTO    DECREMENTOAMARILLO              ; Reduce iterations for SEMAFOROAMARILLO
+00006A                00141 SEMAFOROROJO:
+00006A A4F2           00142                 BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+00006C EF?? F???      00143                 GOTO    SEMAFOROROJO            ; Loops the checking for Timer0
+000070 94F2           00144                 BCF     INTCON,2        ; Clears the timer's flag
+000072 EF?? F???      00145                 GOTO    DECREMENTOROJO          ; Reduce iterations for SEMAFOROROJO
+                      00146 
+000076                00147 BOTON:
+000076 4E17           00148                 DCFSNZ  DURACIONBOTON           ; Subtracts one to BUT
+000078 EF?? F???      00149                 GOTO    GUARDAVERDE             ; If 3 pushes, changes
+00007C A4F2           00150 BOTON1:         BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+00007E EF?? F???      00151                 GOTO    BOTON1          ; Loops the checking for Timer0
+000082 94F2           00152                 BCF     INTCON,2        ; Clears the timer's flag
+000084 A4F2           00153 BOTON2:         BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
+000086 EF?? F???      00154                 GOTO    BOTON2  ; Loops the checking for Timer0
+00008A 94F2           00155                 BCF     INTCON,2        ; Clears the timer's flag
+00008C EF?? F???      00156                 GOTO    DECREMENTOVERDE         ; Reduce iterations for VERDE
+                      00157 
+                      00158 
+000090                00159 DECREMENTOVERDE:
+000090 2E14           00160                 DECFSZ  DURACIONVERDE           ; Subtracts one to VERDE
+000092 EF?? F???      00161                 GOTO    SEMAFOROVERDE           ; Keeps the VERDE cycle
+000096 0E03           00162 GUARDAVERDE:    MOVLW   3               ; 20 times half a second for VERDE
+000098 6E17           00163                 MOVWF   DURACIONBOTON           ; Guarda el valor
+00009A 0E15           00164                 MOVLW   15              ; 20 times half a second for VERDE
+00009C 6E14           00165                 MOVWF   DURACIONVERDE           ; Guarda el valor
+00009E 0E01           00166                 MOVLW   b'00000001'     ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+0000A0 6E83           00167                 MOVWF   PORTD           ; Guarda el valor in Port D
+0000A2 EF?? F???      00168                 GOTO    PARPADEO                ; If 0, changes to PARPADEO
+                      00169                 
+0000A6                00170 DECREMENTOAMARILLO:
+0000A6 2E15           00171                 DECFSZ  DURACIONAMARILLO                ; Subtracts one to YELLLOW
+0000A8 EF?? F???      00172                 GOTO    SEMAFOROAMARILLO                ; Keeps the SEMAFOROAMARILLO cycle
+0000AC 0E02           00173                 MOVLW   2               ; 20 times half a second for SEMAFOROAMARILLO
+0000AE 6E15           00174                 MOVWF   DURACIONAMARILLO                ; Guarda el valor
+0000B0 0E06           00175                 MOVLW   b'00000110'     ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+0000B2 6E83           00176                 MOVWF   PORTD           ; Guarda el valor in Port D
+0000B4 EF?? F???      00177                 GOTO    SEMAFOROROJO            ; If 0, changes to SEMAFOROROJO
+                      00178                 
+0000B8                00179 DECREMENTOROJO:
+0000B8 2E16           00180                 DECFSZ  DURACIONROJO            ; Subtracts one to SEMAFOROROJO
+0000BA EF?? F???      00181                 GOTO    SEMAFOROROJO            ; Keeps the SEMAFOROROJO cycle
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0000B8 EF?? F???      00182                 GOTO    BUTTONG         ; Loops the checking for Timer0
-0000BC 94F2           00183                 BCF     INTCON,2        ; Clears the timer's flag
-0000BE A4F2           00184 BUTTONG2:       BTFSS   INTCON,2        ; Waits until Timer0 reaches its limit
-0000C0 EF?? F???      00185                 GOTO    BUTTONG2        ; Loops the checking for Timer0
-0000C4 94F2           00186                 BCF     INTCON,2        ; Clears the timer's flag
-0000C6 EF?? F???      00187                 GOTO    GREEND          ; Reduce iterations for GREEN
-                      00188                 
-                      00189 
-                      00190                 END 
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  6
+0000BE 0E09           00182                 MOVLW   9               ; 20 times half a second for SEMAFOROROJO
+0000C0 6E16           00183                 MOVWF   DURACIONROJO            ; Guarda el valor
+0000C2 0E11           00184                 MOVLW   b'00010001'     ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+0000C4 6E83           00185                 MOVWF   PORTD           ; Guarda el valor in Port D
+0000C6 EF?? F???      00186                 GOTO    SEMAFOROVERDE           ; If 0, changes to SEMAFOROVERDE
+                      00187         
+                      00188 
+                      00189                 END 
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  6
 
 
 SYMBOL TABLE
@@ -303,12 +302,12 @@ BCLIF                             00000003
 BCLIP                             00000003
 BF                                00000000
 BGST                              00000005
-BLINK                             00000074
-BLINKOFF                          0000008C
-BLINKON                           00000080
 BOR                               00000000
+BOTON                             00000076
+BOTON1                            0000007C
+BOTON2                            00000084
 BRG16                             00000003
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  7
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  7
 
 
 SYMBOL TABLE
@@ -320,10 +319,6 @@ BTOEE                             00000004
 BTOEF                             00000004
 BTSEE                             00000007
 BTSEF                             00000007
-BUT                               00000023
-BUTTON                            000000B0
-BUTTONG                           000000B6
-BUTTONG2                          000000BE
 C                                 00000000
 C1INV                             00000004
 C1OUT                             00000006
@@ -367,16 +362,16 @@ CKE                               00000006
 CKP                               00000004
 CLK1EN                            00000004
 CLKCFG0                           00000006
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  8
+CLKCFG1                           00000007
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-CLKCFG1                           00000007
-CM0                               00000000
-CM1                               00000001
-CM2                               00000002
 CMCON                             00000FB4
 CMIE                              00000006
 CMIF                              00000006
@@ -410,10 +405,17 @@ DDRB                              TRISB
 DDRC                              TRISC
 DDRD                              TRISD
 DDRE                              TRISE
+DECREMENTOAMARILLO                000000A6
+DECREMENTOROJO                    000000B8
+DECREMENTOVERDE                   00000090
 DFN8EE                            00000003
 DFN8EF                            00000003
 DIR                               00000002
 DONE                              00000001
+DURACIONAMARILLO                  00000015
+DURACIONBOTON                     00000017
+DURACIONROJO                      00000016
+DURACIONVERDE                     00000014
 D_A                               00000005
 D_NOT_A                           00000005
 ECCP1AS                           00000FB6
@@ -423,15 +425,15 @@ ECCPAS0                           00000004
 ECCPAS1                           00000005
 ECCPAS2                           00000006
 ECCPASE                           00000007
-EEADR                             00000FA9
-EECON1                            00000FA6
-EECON2                            00000FA7
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE  9
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+EEADR                             00000FA9
+EECON1                            00000FA6
+EECON2                            00000FA7
 EEDATA                            00000FA8
 EEIE                              00000004
 EEIF                              00000004
@@ -479,13 +481,10 @@ GIE_GIEH                          00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-GREEN                             00000062
-GREENB                            0000002E
-GREEND                            00000028
-GREENL                            00000020
+GUARDAVERDE                       00000096
 HLVDCON                           00000FD2
 HLVDEN                            00000004
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 10
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 10
 
 
 SYMBOL TABLE
@@ -544,7 +543,7 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRVST                             00000005
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 11
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 11
 
 
 SYMBOL TABLE
@@ -603,7 +602,7 @@ LVV2                              00000002
 LVV3                              00000003
 MAIN                              00000024
 N                                 00000004
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 12
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 12
 
 
 SYMBOL TABLE
@@ -637,6 +636,9 @@ P                                 00000004
 P1A                               00000002
 P1M0                              00000006
 P1M1                              00000007
+PARPADEO                          0000003A
+PARPADEOAPAGADO                   00000052
+PARPADEOPRENDIDO                  00000046
 PC                                00000FF9
 PCFG0                             00000000
 PCFG1                             00000001
@@ -659,15 +661,15 @@ PEN                               00000002
 PGC                               00000006
 PGD                               00000007
 PGM                               00000005
-PIDEE                             00000000
-PIDEF                             00000000
-PIE1                              00000F9D
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 13
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PIDEE                             00000000
+PIDEF                             00000000
+PIE1                              00000F9D
 PIE2                              00000FA0
 PIR1                              00000F9E
 PIR2                              00000FA1
@@ -718,15 +720,15 @@ RB2                               00000002
 RB3                               00000003
 RB4                               00000004
 RB5                               00000005
-RB6                               00000006
-RB7                               00000007
-RBIE                              00000003
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 14
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
 RBIF                              00000000
 RBIP                              00000000
 RBPU                              00000007
@@ -763,9 +765,6 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RED                               000000A4
-REDD                              00000050
-REDL                              00000022
 RESUME                            00000002
 RI                                00000004
 RSEN                              00000001
@@ -780,13 +779,16 @@ SBOREN                            00000006
 SCKP                              00000004
 SCS0                              00000000
 SCS1                              00000001
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 15
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 SE0                               00000005
+SEMAFOROAMARILLO                  0000005E
+SEMAFOROROJO                      0000006A
+SEMAFOROVERDE                     00000028
 SEN                               00000000
 SENDB                             00000003
 SMP                               00000007
@@ -836,15 +838,15 @@ STKOVF                            00000007
 STKPTR                            00000FFC
 STKPTR0                           00000000
 STKPTR1                           00000001
-STKPTR2                           00000002
-STKPTR3                           00000003
-STKPTR4                           00000004
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 16
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 16
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+STKPTR2                           00000002
+STKPTR3                           00000003
+STKPTR4                           00000004
 STKUNF                            00000006
 SUSPND                            00000001
 SWDTE                             00000000
@@ -895,15 +897,15 @@ TMR0IE                            00000005
 TMR0IF                            00000002
 TMR0IP                            00000002
 TMR0L                             00000FD6
-TMR0ON                            00000007
-TMR1                              00000FCE
-TMR1CS                            00000001
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 17
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TMR0ON                            00000007
+TMR1                              00000FCE
+TMR1CS                            00000001
 TMR1H                             00000FCF
 TMR1IE                            00000000
 TMR1IF                            00000000
@@ -954,15 +956,15 @@ TRISC0                            00000000
 TRISC1                            00000001
 TRISC2                            00000002
 TRISC6                            00000006
-TRISC7                            00000007
-TRISD                             00000F95
-TRISD0                            00000000
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 18
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 18
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISC7                            00000007
+TRISD                             00000F95
+TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
 TRISD3                            00000003
@@ -1013,15 +1015,15 @@ UEP5                              00000F75
 UEP6                              00000F76
 UEP7                              00000F77
 UEP8                              00000F78
-UEP9                              00000F79
-UERRIE                            00000001
-UERRIF                            00000001
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 19
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 19
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+UEP9                              00000F79
+UERRIE                            00000001
+UERRIF                            00000001
 UFRM                              00000F66
 UFRMH                             00000F67
 UFRML                             00000F66
@@ -1056,9 +1058,6 @@ WS1                               00000001
 WS2                               00000002
 WS3                               00000003
 WUE                               00000001
-YELLOW                            00000098
-YELLOWD                           0000003E
-YELLOWL                           00000021
 Z                                 00000002
 _BORV_0_2L                        000000E7
 _BORV_1_2L                        000000EF
@@ -1075,7 +1074,7 @@ _CONFIG1L                         00300000
 _CONFIG2H                         00300003
 _CONFIG2L                         00300002
 _CONFIG3H                         00300005
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 20
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 20
 
 
 SYMBOL TABLE
@@ -1134,7 +1133,7 @@ _FOSC_XTPLL_XT_1H                 000000F2
 _FOSC_XT_XT_1H                    000000F0
 _ICPRT_OFF_4L                     000000DF
 _ICPRT_ON_4L                      000000FF
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 21
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 21
 
 
 SYMBOL TABLE
@@ -1193,7 +1192,7 @@ _WDTPS_8_2H                       000000E7
 _WDT_OFF_2H                       000000FE
 _WDT_ON_2H                        000000FF
 _WRT0_OFF_6L                      000000FF
-MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-30-2020  23:27:55         PAGE 22
+MPASM 5.82     SEMAFORO_MICROCONTROLADOR.ASM   8-31-2020  19:45:47         PAGE 22
 
 
 SYMBOL TABLE

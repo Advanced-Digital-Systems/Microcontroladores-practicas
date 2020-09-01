@@ -80,10 +80,10 @@ list	    p=18f4550        ; list directive to define processor
 ; CONFIG7H
   CONFIG  EBTRB = OFF           ; Boot Block Table Read Protection bit (Boot block (000000-0007FFh) is not protected from table reads executed in other blocks)
 ;****************Variables Definition*********************************
-VERDEL		EQU	0x20
-YELLOWL		EQU	0x21
-REDL		EQU	0x22
-BUT		EQU	0x23
+DURACIONVERDE		EQU	0x14
+DURACIONAMARILLO	EQU	0x15
+DURACIONROJO		EQU	0x16
+DURACIONBOTON		EQU	0x17
 ;****************Main code*****************************
 
 		ORG	0x000           ; reset vector
@@ -95,97 +95,96 @@ INITIALIZE:
 		MOVWF	T0CON		; Habilita TOCON(timer0)
 		CLRF	TRISD		; PortD output
 		MOVLW	15		; Duracion del led verde
-		MOVWF	VERDEL		; Guarda el valor
+		MOVWF	DURACIONVERDE		; Guarda el valor
 		MOVLW	2		; Duracion del led amarillo
-		MOVWF	YELLOWL		; Guarda el valor
+		MOVWF	DURACIONAMARILLO		; Guarda el valor
 		MOVLW	9		; Duracion del led rojo
-		MOVWF	REDL		; Guarda el valor
+		MOVWF	DURACIONROJO		; Guarda el valor
 		MOVLW	b'00010001'	; _ _ _ verde amarillo rojo peaton no peaton
 		MOVWF	PORTD		; Guarda el valor in Port D
 		MOVLW	3		; 3 Duracion del boton presionado
-		MOVWF	BUT		; Guarda el valor
-		GOTO	VERDE		; Inicializa VERDE loop
+		MOVWF	DURACIONBOTON		; Guarda el valor
+		GOTO	SEMAFOROVERDE		; Inicializa SEMAFOROVERDE loop
 
 MAIN:		CALL	INITIALIZE
-    
-VERDED:
-		DECFSZ	VERDEL		; Subtracts one to VERDE
-		GOTO	VERDE		; Keeps the VERDE cycle
-VERDEB:		MOVLW	3		; 20 times half a second for VERDE
-		MOVWF	BUT		; Guarda el valor
-		MOVLW	15		; 20 times half a second for VERDE
-		MOVWF	VERDEL		; Guarda el valor
-		MOVLW	b'00000001'	; _ _ _ VERDE YELLOW RED WALK NWALK
-		MOVWF	PORTD		; Guarda el valor in Port D
-		GOTO	BLINK		; If 0, changes to BLINK
-		
-YELLOWD:
-		DECFSZ	YELLOWL		; Subtracts one to YELLLOW
-		GOTO	YELLOW		; Keeps the YELLOW cycle
-		MOVLW	2		; 20 times half a second for YELLOW
-		MOVWF	YELLOWL		; Guarda el valor
-		MOVLW	b'00000110'	; _ _ _ VERDE YELLOW RED WALK NWALK
-		MOVWF	PORTD		; Guarda el valor in Port D
-		GOTO	RED		; If 0, changes to RED
-		
-REDD:
-		DECFSZ	REDL		; Subtracts one to RED
-		GOTO	RED		; Keeps the RED cycle
-		MOVLW	9		; 20 times half a second for RED
-		MOVWF	REDL		; Guarda el valor
-		MOVLW	b'00010001'	; _ _ _ VERDE YELLOW RED WALK NWALK
-		MOVWF	PORTD		; Guarda el valor in Port D
-		GOTO	VERDE		; If 0, changes to VERDE
-		
-		;LOOP;	
-		
-VERDE:	
+    	
+SEMAFOROVERDE:	
 		BTFSC	PORTC,0		; If an imput was detected
-		GOTO	BUTTON		; Button detection
+		GOTO	BOTON		; Button detection
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	VERDE		; Loops the checking for Timer0
+		GOTO	SEMAFOROVERDE		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	VERDED		; Reduce iterations for VERDE
-BLINK:
+		GOTO	DECREMENTOVERDE		; Reduce iterations for VERDE
+PARPADEO:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	BLINK		; Loops the checking for Timer0
+		GOTO	PARPADEO		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00010001'	; _ _ _ VERDE YELLOW RED WALK NWALK
+		MOVLW	b'00010001'	; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
-BLINKON:
+PARPADEOPRENDIDO:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	BLINKON		; Loops the checking for Timer0
+		GOTO	PARPADEOPRENDIDO		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00000001'	; _ _ _ VERDE YELLOW RED WALK NWALK
+		MOVLW	b'00000001'	; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
-BLINKOFF:
+PARPADEOAPAGADO:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	BLINKOFF	; Loops the checking for Timer0
+		GOTO	PARPADEOAPAGADO	; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00001001'	; _ _ _ VERDE YELLOW RED WALK NWALK
+		MOVLW	b'00001001'	; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
-YELLOW:
+SEMAFOROAMARILLO:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	YELLOW		; Loops the checking for Timer0
+		GOTO	SEMAFOROAMARILLO		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	YELLOWD		; Reduce iterations for YELLOW
-RED:
+		GOTO	DECREMENTOAMARILLO		; Reduce iterations for SEMAFOROAMARILLO
+SEMAFOROROJO:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	RED		; Loops the checking for Timer0
+		GOTO	SEMAFOROROJO		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	REDD		; Reduce iterations for RED
+		GOTO	DECREMENTOROJO		; Reduce iterations for SEMAFOROROJO
 
-BUTTON:
-		DCFSNZ	BUT		; Subtracts one to BUT
-		GOTO	VERDEB		; If 3 pushes, changes
-BUTTONG:	BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	BUTTONG		; Loops the checking for Timer0
+BOTON:
+		DCFSNZ	DURACIONBOTON		; Subtracts one to BUT
+		GOTO	GUARDAVERDE		; If 3 pushes, changes
+BOTON1:		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
+		GOTO	BOTON1		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-BUTTONG2:	BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	BUTTONG2	; Loops the checking for Timer0
+BOTON2:		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
+		GOTO	BOTON2	; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	VERDED		; Reduce iterations for VERDE
+		GOTO	DECREMENTOVERDE		; Reduce iterations for VERDE
+
+
+DECREMENTOVERDE:
+		DECFSZ	DURACIONVERDE		; Subtracts one to VERDE
+		GOTO	SEMAFOROVERDE		; Keeps the VERDE cycle
+GUARDAVERDE:	MOVLW	3		; 20 times half a second for VERDE
+		MOVWF	DURACIONBOTON		; Guarda el valor
+		MOVLW	15		; 20 times half a second for VERDE
+		MOVWF	DURACIONVERDE		; Guarda el valor
+		MOVLW	b'00000001'	; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+		MOVWF	PORTD		; Guarda el valor in Port D
+		GOTO	PARPADEO		; If 0, changes to PARPADEO
 		
+DECREMENTOAMARILLO:
+		DECFSZ	DURACIONAMARILLO		; Subtracts one to YELLLOW
+		GOTO	SEMAFOROAMARILLO		; Keeps the SEMAFOROAMARILLO cycle
+		MOVLW	2		; 20 times half a second for SEMAFOROAMARILLO
+		MOVWF	DURACIONAMARILLO		; Guarda el valor
+		MOVLW	b'00000110'	; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+		MOVWF	PORTD		; Guarda el valor in Port D
+		GOTO	SEMAFOROROJO		; If 0, changes to SEMAFOROROJO
+		
+DECREMENTOROJO:
+		DECFSZ	DURACIONROJO		; Subtracts one to SEMAFOROROJO
+		GOTO	SEMAFOROROJO		; Keeps the SEMAFOROROJO cycle
+		MOVLW	9		; 20 times half a second for SEMAFOROROJO
+		MOVWF	DURACIONROJO		; Guarda el valor
+		MOVLW	b'00010001'	; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+		MOVWF	PORTD		; Guarda el valor in Port D
+		GOTO	SEMAFOROVERDE		; If 0, changes to SEMAFOROVERDE
+	
 
 		END 
 
