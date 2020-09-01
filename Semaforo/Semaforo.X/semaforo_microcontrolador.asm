@@ -80,7 +80,7 @@ list	    p=18f4550        ; list directive to define processor
 ; CONFIG7H
   CONFIG  EBTRB = OFF           ; Boot Block Table Read Protection bit (Boot block (000000-0007FFh) is not protected from table reads executed in other blocks)
 ;****************Variables Definition*********************************
-GREENL		EQU	0x20
+VERDEL		EQU	0x20
 YELLOWL		EQU	0x21
 REDL		EQU	0x22
 BUT		EQU	0x23
@@ -95,7 +95,7 @@ INITIALIZE:
 		MOVWF	T0CON		; Habilita TOCON(timer0)
 		CLRF	TRISD		; PortD output
 		MOVLW	15		; Duracion del led verde
-		MOVWF	GREENL		; Guarda el valor
+		MOVWF	VERDEL		; Guarda el valor
 		MOVLW	2		; Duracion del led amarillo
 		MOVWF	YELLOWL		; Guarda el valor
 		MOVLW	9		; Duracion del led rojo
@@ -104,18 +104,18 @@ INITIALIZE:
 		MOVWF	PORTD		; Guarda el valor in Port D
 		MOVLW	3		; 3 Duracion del boton presionado
 		MOVWF	BUT		; Guarda el valor
-		GOTO	GREEN		; Inicializa GREEN loop
+		GOTO	VERDE		; Inicializa VERDE loop
 
 MAIN:		CALL	INITIALIZE
     
-GREEND:
-		DECFSZ	GREENL		; Subtracts one to GREEN
-		GOTO	GREEN		; Keeps the GREEN cycle
-GREENB:		MOVLW	3		; 20 times half a second for GREEN
+VERDED:
+		DECFSZ	VERDEL		; Subtracts one to VERDE
+		GOTO	VERDE		; Keeps the VERDE cycle
+VERDEB:		MOVLW	3		; 20 times half a second for VERDE
 		MOVWF	BUT		; Guarda el valor
-		MOVLW	15		; 20 times half a second for GREEN
-		MOVWF	GREENL		; Guarda el valor
-		MOVLW	b'00000001'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	15		; 20 times half a second for VERDE
+		MOVWF	VERDEL		; Guarda el valor
+		MOVLW	b'00000001'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
 		GOTO	BLINK		; If 0, changes to BLINK
 		
@@ -124,7 +124,7 @@ YELLOWD:
 		GOTO	YELLOW		; Keeps the YELLOW cycle
 		MOVLW	2		; 20 times half a second for YELLOW
 		MOVWF	YELLOWL		; Guarda el valor
-		MOVLW	b'00000110'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	b'00000110'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
 		GOTO	RED		; If 0, changes to RED
 		
@@ -133,36 +133,36 @@ REDD:
 		GOTO	RED		; Keeps the RED cycle
 		MOVLW	9		; 20 times half a second for RED
 		MOVWF	REDL		; Guarda el valor
-		MOVLW	b'00010001'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	b'00010001'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
-		GOTO	GREEN		; If 0, changes to GREEN
+		GOTO	VERDE		; If 0, changes to VERDE
 		
 		;LOOP;	
 		
-GREEN:	
+VERDE:	
 		BTFSC	PORTC,0		; If an imput was detected
 		GOTO	BUTTON		; Button detection
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
-		GOTO	GREEN		; Loops the checking for Timer0
+		GOTO	VERDE		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	GREEND		; Reduce iterations for GREEN
+		GOTO	VERDED		; Reduce iterations for VERDE
 BLINK:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
 		GOTO	BLINK		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00010001'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	b'00010001'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
 BLINKON:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
 		GOTO	BLINKON		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00000001'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	b'00000001'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
 BLINKOFF:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
 		GOTO	BLINKOFF	; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00001001'	; _ _ _ GREEN YELLOW RED WALK NWALK
+		MOVLW	b'00001001'	; _ _ _ VERDE YELLOW RED WALK NWALK
 		MOVWF	PORTD		; Guarda el valor in Port D
 YELLOW:
 		BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
@@ -177,14 +177,14 @@ RED:
 
 BUTTON:
 		DCFSNZ	BUT		; Subtracts one to BUT
-		GOTO	GREENB		; If 3 pushes, changes
+		GOTO	VERDEB		; If 3 pushes, changes
 BUTTONG:	BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
 		GOTO	BUTTONG		; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
 BUTTONG2:	BTFSS	INTCON,2	; Waits until Timer0 reaches its limit
 		GOTO	BUTTONG2	; Loops the checking for Timer0
 		BCF	INTCON,2	; Clears the timer's flag
-		GOTO	GREEND		; Reduce iterations for GREEN
+		GOTO	VERDED		; Reduce iterations for VERDE
 		
 
 		END 
