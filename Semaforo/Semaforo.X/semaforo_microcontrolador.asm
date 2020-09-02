@@ -100,7 +100,7 @@ INITIALIZE:
 		MOVWF	DURACIONAMARILLO; Guarda el valor de duración en DURACIONAMARILLO
 		MOVLW	9		; Define la duración del led rojo
 		MOVWF	DURACIONROJO	; Guarda el valor de duración en DURACIONROJO
-		MOVLW	b'00010001'	; verde amarillo rojo peaton no peaton-------------
+		MOVLW	b'00010001'	; Prende rojo para peatones y verde para autos
 		MOVWF	PORTD		; Lo guarda en Puerto D
 		MOVLW	3		; Establece cuánto tiempo tiene que ser presionado el botón
 		MOVWF	DURACIONBOTON	; Guarda el valor de 3 segundos en DURACIONBOTON
@@ -113,75 +113,75 @@ SEMAFOROVERDE:
 		GOTO	BOTON		; En caso de que haya una entrada, llama a BOTON
 		BTFSS	INTCON,2	
 		GOTO	SEMAFOROVERDE	; Vuelve al ciclo para el timer 
-		BCF	INTCON,2	; Clears the timer's flag---------------------
+		BCF	INTCON,2	; Reinicia cuenta del timer  
 		GOTO	DECREMENTOVERDE	; Llama a DECREMENTOVERDE
 PARPADEO:
 		BTFSS	INTCON,2	; Espera a que el timer se desborde
 		GOTO	PARPADEO	; Llama a PARPADEO
-		BCF	INTCON,2	; Clears the timer's flag-----------------------
-		MOVLW	b'00010001'	; SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK----------------
+		BCF	INTCON,2	; Reinicia cuenta del timer  
+		MOVLW	b'00010001'	; Prende el rojo para peatones y verde para autos
 		MOVWF	PORTD		; Guarda el valor en el puerto D
 PARPADEOPRENDIDO:
 		BTFSS	INTCON,2	; Espera a que el timer se desborde
 		GOTO	PARPADEOPRENDIDO; llama a PARPADEOPRENDIDO
-		BCF	INTCON,2	; Clears the timer's flag-------------------------------------------
-		MOVLW	b'00000001'	; Prender rojo el peatonal
+		BCF	INTCON,2	; Reinicia cuenta del timer  
+		MOVLW	b'00000001'	; Prender rojo el peatonal y apaga el verde para autos
 		MOVWF	PORTD		; Guarda el valor in Port D
 PARPADEOAPAGADO:
 		BTFSS	INTCON,2	; Espera a que el timer se desborde
-		GOTO	PARPADEOAPAGADO	; Loops the checking for Timer0
-		BCF	INTCON,2	; Clears the timer's flag
-		MOVLW	b'00001001'	; _ _ _ SEMAFOROVERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK
+		GOTO	PARPADEOAPAGADO	; 
+		BCF	INTCON,2	; Reinicia cuenta del timer  
+		MOVLW	b'00001001'	; Prende rojo peatonal y prende amarillo para autos
 		MOVWF	PORTD		; Guarda el valor in Port D
 SEMAFOROAMARILLO:
 		BTFSS	INTCON,2	   ; Espera a que el timer se desborde
 		GOTO	SEMAFOROAMARILLO   ; Vuelve al ciclo para el timer 
-		BCF	INTCON,2	   ; Clears the timer's flag------------------------------------------
+		BCF	INTCON,2	   ; Reinicia cuenta del timer  
 		GOTO	DECREMENTOAMARILLO ; Resta uno al contador de ciclos
 SEMAFOROROJO:
 		BTFSS	INTCON,2	; Espera a que el timer se desborde
 		GOTO	SEMAFOROROJO	; Vuelve al ciclo para el timer 
-		BCF	INTCON,2	; Clears the timer's flag------------------------------
+		BCF	INTCON,2	; Reinicia cuenta del timer  
 		GOTO	DECREMENTOROJO	; Resta uno al contador de ciclos
 
 BOTON:
-		DCFSNZ	DURACIONBOTON	; Subtracts one to BUT -------- (no sé cuál es el nuevo nombre de BUT)
+		DCFSNZ	DURACIONBOTON	; Le resta uno a DURACIONBOTON
 		GOTO	GUARDAVERDE	; Si es presionado 3 veces entra
 BOTON1:		BTFSS	INTCON,2	; Espera a que el timer se desborde
 		GOTO	BOTON1		; Vuelve al ciclo para verificar el timer
-		BCF	INTCON,2	; Clears the timer's flag-------------------------
+		BCF	INTCON,2	; Reinicia cuenta del timer  
 BOTON2:		BTFSS	INTCON,2	; Espera a que el timer se desborde
 		GOTO	BOTON2	        ; Vuelve al ciclo para verificar el timer
-		BCF	INTCON,2	; Clears the timer's flag----------------------------
+		BCF	INTCON,2	; Reinicia cuenta del timer  
 		GOTO	DECREMENTOVERDE	; Resta uno al contador de ciclos 
 
 
 DECREMENTOVERDE:
 		DECFSZ	DURACIONVERDE		; Resta uno al contador 
 		GOTO	SEMAFOROVERDE		; Vuelve a SEMAFOROVERDE
-GUARDAVERDE:	MOVLW	3		        ; 20 times half a second for VERDE-----------------
+GUARDAVERDE:	MOVLW	3		        ; 20 veces por cada segundo en SEMAFOROVERDE
 		MOVWF	DURACIONBOTON		; Guarda el valor
 		MOVLW	15		        ; 20 times half a second for VERDE
 		MOVWF	DURACIONVERDE		; Guarda el valor
-		MOVLW	b'00000001'	        ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK----------
+		MOVLW	b'00000001'	        ; Prende rojo para peatones y apaga amarillo para autos
 		MOVWF	PORTD		        ; Guarda el valor en el Puerto D
 		GOTO	PARPADEO	 	; Si el valor es 0, va a PARPADEO
 		
 DECREMENTOAMARILLO:
 		DECFSZ	DURACIONAMARILLO	; Resta uno al contador 
 		GOTO	SEMAFOROAMARILLO	; Vuelve a SEMAFOROAMARILLO
-		MOVLW	2		        ; 20 times half a second for SEMAFOROAMARILLO--------------
+		MOVLW	2		        ; 20 veces por cada segundo en SEMAFOROAMARILLO
 		MOVWF	DURACIONAMARILLO	; Guarda el valor
-		MOVLW	b'00000110'	        ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK----------
+		MOVLW	b'00000110'	        ; Verde para peatones y rojo autos
 		MOVWF	PORTD		        ; Guarda el valor el puerto D
 		GOTO	SEMAFOROROJO	 	; Si el valor es 0, va a SEMAFOROJO
 		
 DECREMENTOROJO:
 		DECFSZ	DURACIONROJO		; Resta uno al contador de ciclo
 		GOTO	SEMAFOROROJO		; Vuelve a semáforo rojo
-		MOVLW	9		        ; 20 times half a second for SEMAFOROROJO ---------------
+		MOVLW	9		        ; 20 veces por cada segundo en SEMAFOROROJO
 		MOVWF	DURACIONROJO		; Guarda el valor
-		MOVLW	b'00010001'	        ; _ _ _ VERDE SEMAFOROAMARILLO SEMAFOROROJO WALK NWALK ------------
+		MOVLW	b'00010001'	        ; Rojo para peatones y verde autos
 		MOVWF	PORTD		        ; Guarda el valor en el puerto D
 		GOTO	SEMAFOROVERDE		; Si es 0, regresa a SEMAFOROVERDE
 	
