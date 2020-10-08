@@ -55,16 +55,16 @@ void display(int num){
             PORTD = 0b01111110;
             break;
         case 1:
-            PORTD = 0b00110000;
+            PORTD = 0b01011011;
             break;
         case 2:
-            PORTD = 0b01101101;
+            PORTD = 0b00010111;
             break;
         case 3:
-            PORTD = 0b01111001;
+            PORTD = 0b01111110;
             break;
         case 4:
-            PORTD = 0b00110011;
+            PORTD = 0b00000000;
             break;
         case 5:
             PORTD = 0b01011011;
@@ -76,10 +76,10 @@ void display(int num){
             PORTD = 0b01110000;
             break;
         case 8:
-            PORTD = 0b01111111;
+            PORTD = 0b01001111;
             break;
         case 9:
-            PORTD = 0b01111011;
+            PORTD = 0b00110011;
             break;
     }
 }
@@ -123,23 +123,37 @@ void main(void)
             delay_ms(distance*2000/40);    // Distance variable delay
         }
         else{
-            PORTB = 0b00010000;                   // Activa el display de decenas
-            display(9);                    // Imprime decenas
-            __delay_ms(10); 
+            //aqui debe haber un if donde se haga la comparación
             PORTB = 0b00000000;
-            __delay_ms(10); 
+            PORTB = 0b00010000;                   // Activa el display de decenas
+            display(9);                    // Imprime decenas 
+            __delay_ms(10);
+            PORTB = 0b00000000;
             PORTB = 0b00100000;                // Activa display de unidades
             display(8);                   // Imprime unidades
-             __delay_ms(10);   
+            __delay_ms(10);   
             PORTB = 0b00000000;
-            __delay_ms(10);
             PORTB = 0b01000000;                  // Activa display decimales
             display(1);                 // Imprime decimales
             __delay_ms(10); 
-            PORTB = 0b00000000;
-            __delay_ms(10);
+            //PORTB = 0b00000000;
             IO_RC2_SetHigh(); 
             IO_RC6_SetHigh(); 
+            
+            //aqui se hace el else del if 
+            PORTB = 0b00000000;
+            PORTB = 0b00010000;                   // Activa el display de decenas
+            display(2);                    // Imprime decenas
+            __delay_ms(10);
+            PORTB = 0b00000000;
+            PORTB = 0b00100000;                // Activa display de unidades
+            display(3);                   // Imprime unidades
+             __delay_ms(10);
+            PORTB = 0b00000000;
+            PORTB = 0b01000000;                  // Activa display decimales
+            display(4);                 // Imprime decimales
+            __delay_ms(10);
+            
         }
         // If triggerFlag is on
         if(triggerFlag){
