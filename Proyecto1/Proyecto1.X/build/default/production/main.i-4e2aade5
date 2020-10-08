@@ -8216,13 +8216,13 @@ void display(int num){
             PORTD = 0b01111110;
             break;
         case 1:
-            PORTD = 0b01011011;
+            PORTD = 0b01011001;
             break;
         case 2:
-            PORTD = 0b00010111;
+            PORTD = 0b01110100;
             break;
         case 3:
-            PORTD = 0b01111110;
+            PORTD = 0b00111111;
             break;
         case 4:
             PORTD = 0b00000000;
@@ -8237,10 +8237,10 @@ void display(int num){
             PORTD = 0b01110000;
             break;
         case 8:
-            PORTD = 0b01001111;
+            PORTD = 0b01111001;
             break;
         case 9:
-            PORTD = 0b00110011;
+            PORTD = 0b01100110;
             break;
     }
 }
@@ -8284,37 +8284,44 @@ void main(void)
             delay_ms(distance*2000/40);
         }
         else{
-
-            PORTB = 0b00000000;
-            PORTB = 0b00010000;
+            if(981==981){
+                PORTB = 0b00010000;
             display(9);
             _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00100000;
             display(8);
-            _delay((unsigned long)((10)*(4000000/4000.0)));
+             _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b01000000;
             display(1);
             _delay((unsigned long)((10)*(4000000/4000.0)));
-
+            PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
             do { LATCbits.LATC2 = 1; } while(0);
             do { LATCbits.LATC6 = 1; } while(0);
-
-
-            PORTB = 0b00000000;
-            PORTB = 0b00010000;
+            }
+            else{
+             PORTB = 0b00010000;
             display(2);
             _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00100000;
             display(3);
              _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
             PORTB = 0b01000000;
             display(4);
             _delay((unsigned long)((10)*(4000000/4000.0)));
-
+            PORTB = 0b00000000;
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+            do { LATCbits.LATC2 = 1; } while(0);
+            do { LATCbits.LATC6 = 1; } while(0);
+            }
         }
 
         if(triggerFlag){
