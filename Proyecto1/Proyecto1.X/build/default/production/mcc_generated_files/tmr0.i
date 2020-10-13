@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "mcc_generated_files/tmr0.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,10 +6,8 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 44 "main.c"
-# 1 "./mcc_generated_files/mcc.h" 1
-# 49 "./mcc_generated_files/mcc.h"
+# 1 "mcc_generated_files/tmr0.c" 2
+# 51 "mcc_generated_files/tmr0.c"
 # 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\xc.h" 1 3
 # 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -8006,18 +8004,10 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\xc.h" 2 3
-# 49 "./mcc_generated_files/mcc.h" 2
+# 51 "mcc_generated_files/tmr0.c" 2
 
-# 1 "./mcc_generated_files/device_config.h" 1
-# 50 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/pin_manager.h" 1
-# 410 "./mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_Initialize (void);
-# 422 "./mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_IOC(void);
-# 51 "./mcc_generated_files/mcc.h" 2
-
+# 1 "mcc_generated_files/tmr0.h" 1
+# 54 "mcc_generated_files/tmr0.h"
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -8103,265 +8093,104 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 2 3
-# 52 "./mcc_generated_files/mcc.h" 2
+# 54 "mcc_generated_files/tmr0.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdbool.h" 1 3
-# 53 "./mcc_generated_files/mcc.h" 2
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\errno.h" 1 3
-# 12 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\conio.h" 2 3
-
-# 1 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\__null.h" 1 3
-# 9 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\conio.h" 2 3
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 54 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/interrupt_manager.h" 1
-# 110 "./mcc_generated_files/interrupt_manager.h"
-void INTERRUPT_Initialize (void);
-# 55 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/ext_int.h" 1
-# 562 "./mcc_generated_files/ext_int.h"
-void EXT_INT_Initialize(void);
-# 584 "./mcc_generated_files/ext_int.h"
-void INT0_ISR(void);
-# 608 "./mcc_generated_files/ext_int.h"
-void INT0_CallBack(void);
-# 631 "./mcc_generated_files/ext_int.h"
-void INT0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 655 "./mcc_generated_files/ext_int.h"
-extern void (*INT0_InterruptHandler)(void);
-# 679 "./mcc_generated_files/ext_int.h"
-void INT0_DefaultInterruptHandler(void);
-# 697 "./mcc_generated_files/ext_int.h"
-void INT1_ISR(void);
-# 721 "./mcc_generated_files/ext_int.h"
-void INT1_CallBack(void);
-# 744 "./mcc_generated_files/ext_int.h"
-void INT1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 768 "./mcc_generated_files/ext_int.h"
-extern void (*INT1_InterruptHandler)(void);
-# 792 "./mcc_generated_files/ext_int.h"
-void INT1_DefaultInterruptHandler(void);
-# 810 "./mcc_generated_files/ext_int.h"
-void INT2_ISR(void);
-# 834 "./mcc_generated_files/ext_int.h"
-void INT2_CallBack(void);
-# 857 "./mcc_generated_files/ext_int.h"
-void INT2_SetInterruptHandler(void (* InterruptHandler)(void));
-# 881 "./mcc_generated_files/ext_int.h"
-extern void (*INT2_InterruptHandler)(void);
-# 905 "./mcc_generated_files/ext_int.h"
-void INT2_DefaultInterruptHandler(void);
-# 56 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr0.h" 1
-# 100 "./mcc_generated_files/tmr0.h"
+# 55 "mcc_generated_files/tmr0.h" 2
+# 100 "mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
-# 129 "./mcc_generated_files/tmr0.h"
+# 129 "mcc_generated_files/tmr0.h"
 void TMR0_StartTimer(void);
-# 161 "./mcc_generated_files/tmr0.h"
+# 161 "mcc_generated_files/tmr0.h"
 void TMR0_StopTimer(void);
-# 197 "./mcc_generated_files/tmr0.h"
+# 197 "mcc_generated_files/tmr0.h"
 uint16_t TMR0_ReadTimer(void);
-# 236 "./mcc_generated_files/tmr0.h"
+# 236 "mcc_generated_files/tmr0.h"
 void TMR0_WriteTimer(uint16_t timerVal);
-# 272 "./mcc_generated_files/tmr0.h"
+# 272 "mcc_generated_files/tmr0.h"
 void TMR0_Reload(void);
-# 310 "./mcc_generated_files/tmr0.h"
+# 310 "mcc_generated_files/tmr0.h"
 _Bool TMR0_HasOverflowOccured(void);
-# 57 "./mcc_generated_files/mcc.h" 2
-
-
-unsigned char row = 0;
-unsigned char col = 0;
-unsigned char count = 0;
-const char keypad [4] [3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
-_Bool correct_password = 1;
-_Bool button_pressed = 0;
-
-const char password_first = '8';
-const char password_second = '2';
-const char password_third = '1';
-const char password_fourth = '3';
-# 83 "./mcc_generated_files/mcc.h"
-void SYSTEM_Initialize(void);
-# 96 "./mcc_generated_files/mcc.h"
-void OSCILLATOR_Initialize(void);
-# 44 "main.c" 2
+# 52 "mcc_generated_files/tmr0.c" 2
 
 
 
 
 
-void display(int);
-void display(int num){
 
-    switch(num){
-        case 0:
-            PORTA = 0b01111110;
-            break;
-        case 1:
-            PORTA = 0b00110000;
-            break;
-        case 2:
-            PORTA = 0b01101101;
-            break;
-        case 3:
-            PORTA = 0b01111001;
-            break;
-        case 4:
-            PORTA = 0b00110011;
-            break;
-        case 5:
-            PORTA = 0b01011011;
-            break;
-        case 6:
-            PORTA = 0b01011111;
-            break;
-        case 7:
-            PORTA = 0b01110000;
-            break;
-        case 8:
-            PORTA = 0b01111111;
-            break;
-        case 9:
-            PORTA = 0b01111011;
-            break;
-    }
-}
+
+volatile uint16_t timer0ReloadVal;
 
 
 
-void main(void)
+
+
+
+void TMR0_Initialize(void)
 {
 
-    SYSTEM_Initialize();
+
+
+    T0CONbits.T08BIT = 0;
+
+
+    TMR0H = 0x00;
+
+
+    TMR0L = 0x00;
 
 
 
+    timer0ReloadVal = (uint16_t)((TMR0H << 8) | TMR0L);
 
 
-
-    (INTCONbits.GIE = 1);
-
+    INTCONbits.TMR0IF = 0;
 
 
+    T0CON = 0x9F;
+}
 
+void TMR0_StartTimer(void)
+{
 
-    (INTCONbits.PEIE = 1);
+    T0CONbits.TMR0ON = 1;
+}
 
+void TMR0_StopTimer(void)
+{
 
+    T0CONbits.TMR0ON = 0;
+}
 
-    PORTD = 0xF;
-    while (1)
-    {
+uint16_t TMR0_ReadTimer(void)
+{
+    uint16_t readVal;
+    uint8_t readValLow;
+    uint8_t readValHigh;
 
-        if(button_pressed){
+    readValLow = TMR0L;
+    readValHigh = TMR0H;
+    readVal = ((uint16_t)readValHigh << 8) + readValLow;
 
-            PORTD = 0x1;
-            if(PORTB){
-                row = 0;
-            }
+    return readVal;
+}
 
-            PORTD = 0x2;
-            if(PORTB){
-                row = 1;
-            }
+void TMR0_WriteTimer(uint16_t timerVal)
+{
 
-            PORTD = 0x4;
-            if(PORTB){
-                row = 2;
-            }
+    TMR0H = timerVal >> 8;
+    TMR0L = (uint8_t) timerVal;
+}
 
-            PORTD = 0x8;
-            if(PORTB){
-                row = 3;
-            }
-            PORTD = 0xF;
+void TMR0_Reload(void)
+{
 
+    TMR0H = timer0ReloadVal >> 8;
+    TMR0L = (uint8_t) timer0ReloadVal;
+}
 
+_Bool TMR0_HasOverflowOccured(void)
+{
 
-            count++;
-
-
-            if (keypad[row][col] == '#') {
-                count = 0;
-                correct_password = 1;
-            }
-
-            if (count == 1) {
-                if(!(keypad[row][col] == password_first)) {
-                    correct_password = 0;
-                }
-
-            } else if (count == 2) {
-                if(!(keypad[row][col] == password_second)) {
-                    correct_password = 0;
-                }
-
-            } else if (count == 3) {
-                if(!(keypad[row][col] == password_third)) {
-                    correct_password = 0;
-                }
-
-
-            } else if (count == 4) {
-                if(!(keypad[row][col] == password_fourth)) {
-                    correct_password = 0;
-                }
-
-                if(correct_password == 1) {
-                    PORTE = 0b0001;
-                    display(1);
-                    do { LATCbits.LATC2 = 1; } while(0);
-                    do { LATCbits.LATC6 = 1; } while(0);
-                    _delay((unsigned long)((3000)*(4000000/4000.0)));
-                    do { LATCbits.LATC2 = 0; } while(0);
-                    do { LATCbits.LATC6 = 0; } while(0);
-                    PORTE = 0b0000;
-
-                } else {
-                    PORTE = 0b0001;
-                    display(0);
-                    do { LATCbits.LATC0 = 1; } while(0);
-                    do { LATCbits.LATC1 = 1; } while(0);
-                    _delay((unsigned long)((3000)*(4000000/4000.0)));
-                    do { LATCbits.LATC0 = 0; } while(0);
-                    do { LATCbits.LATC1 = 0; } while(0);
-                    PORTE = 0b0000;
-
-                    correct_password = 1;
-                }
-                count = 0;
-            }
-            button_pressed = 0;
-        }
-    }
+    return(INTCONbits.TMR0IF);
 }

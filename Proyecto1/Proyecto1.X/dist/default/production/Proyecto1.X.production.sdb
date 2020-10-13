@@ -27,23 +27,11 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\Umul64.c
 [v ___omul __omul `(uo  1 e 8 0 ]
-<<<<<<< HEAD
 "50 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\main.c
-=======
-"10 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\xxtofl.c
-[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-"51 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\main.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _display display `(v  1 e 1 0 ]
 "88
 [v _main main `(v  1 e 1 0 ]
-<<<<<<< HEAD
 "36 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
-=======
-"170
-[v _delay_ms delay_ms `(v  1 e 1 0 ]
-"35 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
 "45
 [v _INT0_CallBack INT0_CallBack `(v  1 e 1 0 ]
@@ -69,7 +57,6 @@
 [v _INT2_DefaultInterruptHandler INT2_DefaultInterruptHandler `(v  1 e 1 0 ]
 "130
 [v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
-<<<<<<< HEAD
 "52 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
 "58
@@ -82,32 +69,6 @@
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 "66 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
-=======
-"52 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
-[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
-"58
-[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]
-"50 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/mcc.c
-[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"60
-[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
-"55 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/pin_manager.c
-[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"66 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
-[v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
-"90
-[v _TMR0_StartTimer TMR0_StartTimer `(v  1 e 1 0 ]
-"96
-[v _TMR0_StopTimer TMR0_StopTimer `(v  1 e 1 0 ]
-"102
-[v _TMR0_ReadTimer TMR0_ReadTimer `(us  1 e 2 0 ]
-"122
-[v _TMR0_Reload TMR0_Reload `(v  1 e 1 0 ]
-"64 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X/mcc_generated_files/mcc.h
-[v _distance distance `f  1 e 4 0 ]
-"66
-[v _triggerFlag triggerFlag `a  1 e 1 0 ]
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 "232 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\pic\include\proc\pic18f45k50.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3931 ]
 "277
@@ -295,7 +256,6 @@
 ]
 [u S101 . 1 `S79 1 . 1 0 `S88 1 . 1 0 `S97 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES101  1 e 1 @4082 ]
-<<<<<<< HEAD
 "32 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
 [v _INT0_InterruptHandler INT0_InterruptHandler `*.37(v  1 e 2 0 ]
 "33
@@ -320,146 +280,39 @@
 [v _main main `(v  1 e 1 0 ]
 {
 "193
-=======
-"32 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
-[v _INT0_InterruptHandler INT0_InterruptHandler `*.37(v  1 e 2 0 ]
-"33
-[v _INT1_InterruptHandler INT1_InterruptHandler `*.37(v  1 e 2 0 ]
-"59 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
-[v _timer0ReloadVal timer0ReloadVal `VEus  1 e 2 0 ]
-"86 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\main.c
-[v _main main `(v  1 e 1 0 ]
-{
-"167
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 } 0
 "50
 [v _display display `(v  1 e 1 0 ]
 {
-<<<<<<< HEAD
 [v display@num num `i  1 p 2 2 ]
 "84
 } 0
 "50 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/mcc.c
-=======
-[v display@num num `i  1 p 2 0 ]
-"85
-} 0
-"170
-[v _delay_ms delay_ms `(v  1 e 1 0 ]
-{
-[v delay_ms@delay delay `i  1 p 2 60 ]
-"178
-} 0
-"43 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\fltol.c
-[v ___fltol __fltol `(l  1 e 4 0 ]
-{
-"45
-[v ___fltol@exp1 exp1 `uc  1 a 1 59 ]
-[v ___fltol@sign1 sign1 `uc  1 a 1 58 ]
-"43
-[v ___fltol@f1 f1 `d  1 p 4 50 ]
-"70
-} 0
-"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\sprcmul.c
-[v ___flmul __flmul `(d  1 e 4 0 ]
-{
-[s S986 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
-"13
-[s S991 . 4 `s 1 wordA 2 0 `s 1 wordB 2 2 ]
-[u S994 . 4 `l 1 i 4 0 `d 1 f 4 0 `S986 1 fAsBytes 4 0 `S991 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S994  1 a 4 19 ]
-"12
-[v ___flmul@grs grs `ul  1 a 4 13 ]
-[s S1062 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
-"14
-[u S1065 . 2 `s 1 i 2 0 `us 1 n 2 0 `S1062 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1065  1 a 2 23 ]
-"10
-[v ___flmul@bexp bexp `uc  1 a 1 18 ]
-"11
-[v ___flmul@aexp aexp `uc  1 a 1 17 ]
-"9
-[v ___flmul@sign sign `uc  1 a 1 12 ]
-"8
-[v ___flmul@b b `d  1 p 4 0 ]
-[v ___flmul@a a `d  1 p 4 4 ]
-"205
-} 0
-"4 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\flge.c
-[v ___flge __flge `(b  1 e 0 0 ]
-{
-[v ___flge@ff1 ff1 `d  1 p 4 0 ]
-[v ___flge@ff2 ff2 `d  1 p 4 4 ]
-"19
-} 0
-"11 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c99\common\sprcdiv.c
-[v ___fldiv __fldiv `(d  1 e 4 0 ]
-{
-"21
-[v ___fldiv@grs grs `ul  1 a 4 44 ]
-"22
-[v ___fldiv@rem rem `ul  1 a 4 37 ]
-"20
-[v ___fldiv@new_exp new_exp `s  1 a 2 42 ]
-"19
-[v ___fldiv@aexp aexp `uc  1 a 1 49 ]
-"18
-[v ___fldiv@bexp bexp `uc  1 a 1 48 ]
-"16
-[v ___fldiv@sign sign `uc  1 a 1 41 ]
-"11
-[v ___fldiv@b b `d  1 p 4 25 ]
-[v ___fldiv@a a `d  1 p 4 29 ]
-"185
-} 0
-"50 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/mcc.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "58
 } 0
-<<<<<<< HEAD
 "66 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
-=======
-"66 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
 {
 "88
 } 0
-<<<<<<< HEAD
 "55 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/pin_manager.c
-=======
-"55 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/pin_manager.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "97
 } 0
-<<<<<<< HEAD
 "60 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/mcc.c
-=======
-"60 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/mcc.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "70
 } 0
-<<<<<<< HEAD
 "52 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
-=======
-"52 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
 {
 "56
 } 0
-<<<<<<< HEAD
 "130 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
-=======
-"91 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _EXT_INT_Initialize EXT_INT_Initialize `(v  1 e 1 0 ]
 {
 "159
@@ -482,25 +335,9 @@
 [v INT0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 2 ]
 "56
 } 0
-<<<<<<< HEAD
 "58 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]
 {
-=======
-"58 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/interrupt_manager.c
-[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]
-{
-"73
-} 0
-"61 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
-[v _INT1_ISR INT1_ISR `(v  1 e 1 0 ]
-{
-"67
-} 0
-"70
-[v _INT1_CallBack INT1_CallBack `(v  1 e 1 0 ]
-{
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 "77
 } 0
 "98 C:\Users\riky_\OneDrive - Instituto Tecnologico y de Estudios Superiores de Monterrey\Documents\Quinto Semestre\Microcontroladores\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
@@ -518,13 +355,8 @@
 {
 "128
 } 0
-<<<<<<< HEAD
 "67
 [v _INT1_ISR INT1_ISR `(v  1 e 1 0 ]
-=======
-"96 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
-[v _TMR0_StopTimer TMR0_StopTimer `(v  1 e 1 0 ]
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 {
 "73
 } 0
@@ -538,11 +370,7 @@
 {
 "97
 } 0
-<<<<<<< HEAD
 "36
-=======
-"35 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/ext_int.c
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
 {
 "42
@@ -555,14 +383,5 @@
 "58
 [v _INT0_DefaultInterruptHandler INT0_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
-<<<<<<< HEAD
 "66
-=======
-"60
-} 0
-"90 C:\Users\52899\MPLABXProjects\Microcontroladores-practicas\Proyecto1\Proyecto1.X\mcc_generated_files/tmr0.c
-[v _TMR0_StartTimer TMR0_StartTimer `(v  1 e 1 0 ]
-{
-"94
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
 } 0

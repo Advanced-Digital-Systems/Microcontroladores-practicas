@@ -54,7 +54,6 @@ void display(int num){
             PORTA = 0b01111110;
             break;
         case 1:
-<<<<<<< HEAD
             PORTA = 0b00110000;
             break;
         case 2:
@@ -65,18 +64,6 @@ void display(int num){
             break;
         case 4:
             PORTA = 0b00110011;
-=======
-            PORTD = 0b01011011;
-            break;
-        case 2:
-            PORTD = 0b00010111;
-            break;
-        case 3:
-            PORTD = 0b01111110;
-            break;
-        case 4:
-            PORTD = 0b00000000;
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
             break;
         case 5:
             PORTA = 0b01011011;
@@ -88,17 +75,10 @@ void display(int num){
             PORTA = 0b01110000;
             break;
         case 8:
-<<<<<<< HEAD
             PORTA = 0b01111111;
             break;
         case 9:
             PORTA = 0b01111011;
-=======
-            PORTD = 0b01001111;
-            break;
-        case 9:
-            PORTD = 0b00110011;
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
             break;
     }
 }
@@ -128,7 +108,6 @@ void main(void)
     PORTD = 0xF;
     while (1)
     {
-<<<<<<< HEAD
         // Si un botón ha sido presionado, se inicia un scaneo cambiando el valor del puerto B para detectar la fila que se presionó
         if(button_pressed){
             // Si el puerto B sigue encendido cuando solo está activa la fila 0, esa es la fila presionada
@@ -156,57 +135,6 @@ void main(void)
             // Se checa el conteo de los botones presionados (máximo 4, porque la contraseña es de 4 caracteres) para comparar la entrada a la contraseña correcta al final
             // Por default la contraseña está correcta, pero esto puede cambiar a falso en cualquier etapa.
             count++; // Se incrementa el conteo, para darle seguimiento a la secuencia
-=======
-        // If the distance is less than 40 cm
-        if(distance < 40){
-            IO_RC2_SetLow();
-            IO_RC6_SetLow();
-            IO_RC0_SetHigh();           // Turn on LED
-            IO_RC1_SetHigh();           // Turn on Buzzer
-            __delay_ms(250);            // Constant delay of 250 ms
-            IO_RC0_SetLow();            // Turn off LED
-            IO_RC1_SetLow();            // Turn off Buzzer
-            delay_ms(distance*2000/40);    // Distance variable delay
-        }
-        else{
-            //aqui debe haber un if donde se haga la comparación
-            PORTB = 0b00000000;
-            PORTB = 0b00010000;                   // Activa el display de decenas
-            display(9);                    // Imprime decenas 
-            __delay_ms(10);
-            PORTB = 0b00000000;
-            PORTB = 0b00100000;                // Activa display de unidades
-            display(8);                   // Imprime unidades
-            __delay_ms(10);   
-            PORTB = 0b00000000;
-            PORTB = 0b01000000;                  // Activa display decimales
-            display(1);                 // Imprime decimales
-            __delay_ms(10); 
-            //PORTB = 0b00000000;
-            IO_RC2_SetHigh(); 
-            IO_RC6_SetHigh(); 
-            
-            //aqui se hace el else del if 
-            PORTB = 0b00000000;
-            PORTB = 0b00010000;                   // Activa el display de decenas
-            display(2);                    // Imprime decenas
-            __delay_ms(10);
-            PORTB = 0b00000000;
-            PORTB = 0b00100000;                // Activa display de unidades
-            display(3);                   // Imprime unidades
-             __delay_ms(10);
-            PORTB = 0b00000000;
-            PORTB = 0b01000000;                  // Activa display decimales
-            display(4);                 // Imprime decimales
-            __delay_ms(10);
-            
-        }
-        // If triggerFlag is on
-        if(triggerFlag){
-            IO_RB3_SetHigh();           // Activate sensor
-            __delay_us(10);             // Requires 10 us
-            IO_RB3_SetLow();            // Turn off the activator
->>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
             
             // Si se presionó '#', se resetea el conteo y se empieza de nuevo la lectura de la contraseña
             if (keypad[row][col] == '#') { 
