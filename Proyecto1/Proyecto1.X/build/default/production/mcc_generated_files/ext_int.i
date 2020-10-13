@@ -8006,33 +8006,54 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\xc.h" 2 3
 # 27 "mcc_generated_files/ext_int.c" 2
 
-# 1 "mcc_generated_files/ext_int.h" 1
-# 406 "mcc_generated_files/ext_int.h"
-void EXT_INT_Initialize(void);
-# 428 "mcc_generated_files/ext_int.h"
-void INT0_ISR(void);
-# 452 "mcc_generated_files/ext_int.h"
-void INT0_CallBack(void);
-# 475 "mcc_generated_files/ext_int.h"
-void INT0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 499 "mcc_generated_files/ext_int.h"
-extern void (*INT0_InterruptHandler)(void);
-# 523 "mcc_generated_files/ext_int.h"
-void INT0_DefaultInterruptHandler(void);
-# 541 "mcc_generated_files/ext_int.h"
-void INT1_ISR(void);
-# 565 "mcc_generated_files/ext_int.h"
-void INT1_CallBack(void);
-# 588 "mcc_generated_files/ext_int.h"
-void INT1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 612 "mcc_generated_files/ext_int.h"
-extern void (*INT1_InterruptHandler)(void);
-# 636 "mcc_generated_files/ext_int.h"
-void INT1_DefaultInterruptHandler(void);
+# 1 "mcc_generated_files/pin_manager.h" 1
+# 410 "mcc_generated_files/pin_manager.h"
+void PIN_MANAGER_Initialize (void);
+# 422 "mcc_generated_files/pin_manager.h"
+void PIN_MANAGER_IOC(void);
 # 28 "mcc_generated_files/ext_int.c" 2
 
-# 1 "mcc_generated_files/tmr0.h" 1
-# 54 "mcc_generated_files/tmr0.h"
+# 1 "mcc_generated_files/ext_int.h" 1
+# 562 "mcc_generated_files/ext_int.h"
+void EXT_INT_Initialize(void);
+# 584 "mcc_generated_files/ext_int.h"
+void INT0_ISR(void);
+# 608 "mcc_generated_files/ext_int.h"
+void INT0_CallBack(void);
+# 631 "mcc_generated_files/ext_int.h"
+void INT0_SetInterruptHandler(void (* InterruptHandler)(void));
+# 655 "mcc_generated_files/ext_int.h"
+extern void (*INT0_InterruptHandler)(void);
+# 679 "mcc_generated_files/ext_int.h"
+void INT0_DefaultInterruptHandler(void);
+# 697 "mcc_generated_files/ext_int.h"
+void INT1_ISR(void);
+# 721 "mcc_generated_files/ext_int.h"
+void INT1_CallBack(void);
+# 744 "mcc_generated_files/ext_int.h"
+void INT1_SetInterruptHandler(void (* InterruptHandler)(void));
+# 768 "mcc_generated_files/ext_int.h"
+extern void (*INT1_InterruptHandler)(void);
+# 792 "mcc_generated_files/ext_int.h"
+void INT1_DefaultInterruptHandler(void);
+# 810 "mcc_generated_files/ext_int.h"
+void INT2_ISR(void);
+# 834 "mcc_generated_files/ext_int.h"
+void INT2_CallBack(void);
+# 857 "mcc_generated_files/ext_int.h"
+void INT2_SetInterruptHandler(void (* InterruptHandler)(void));
+# 881 "mcc_generated_files/ext_int.h"
+extern void (*INT2_InterruptHandler)(void);
+# 905 "mcc_generated_files/ext_int.h"
+void INT2_DefaultInterruptHandler(void);
+# 29 "mcc_generated_files/ext_int.c" 2
+
+# 1 "mcc_generated_files/mcc.h" 1
+# 50 "mcc_generated_files/mcc.h"
+# 1 "mcc_generated_files/device_config.h" 1
+# 50 "mcc_generated_files/mcc.h" 2
+
+
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 1 3
 # 22 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 3
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\bits/alltypes.h" 1 3
@@ -8118,39 +8139,10 @@ typedef int32_t int_fast32_t;
 typedef uint16_t uint_fast16_t;
 typedef uint32_t uint_fast32_t;
 # 144 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdint.h" 2 3
-# 54 "mcc_generated_files/tmr0.h" 2
+# 52 "mcc_generated_files/mcc.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\stdbool.h" 1 3
-# 55 "mcc_generated_files/tmr0.h" 2
-# 100 "mcc_generated_files/tmr0.h"
-void TMR0_Initialize(void);
-# 129 "mcc_generated_files/tmr0.h"
-void TMR0_StartTimer(void);
-# 161 "mcc_generated_files/tmr0.h"
-void TMR0_StopTimer(void);
-# 197 "mcc_generated_files/tmr0.h"
-uint16_t TMR0_ReadTimer(void);
-# 236 "mcc_generated_files/tmr0.h"
-void TMR0_WriteTimer(uint16_t timerVal);
-# 272 "mcc_generated_files/tmr0.h"
-void TMR0_Reload(void);
-# 310 "mcc_generated_files/tmr0.h"
-_Bool TMR0_HasOverflowOccured(void);
-# 29 "mcc_generated_files/ext_int.c" 2
-
-# 1 "mcc_generated_files/mcc.h" 1
-# 50 "mcc_generated_files/mcc.h"
-# 1 "mcc_generated_files/device_config.h" 1
-# 50 "mcc_generated_files/mcc.h" 2
-
-# 1 "mcc_generated_files/pin_manager.h" 1
-# 329 "mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_Initialize (void);
-# 341 "mcc_generated_files/pin_manager.h"
-void PIN_MANAGER_IOC(void);
-# 51 "mcc_generated_files/mcc.h" 2
-
-
+# 53 "mcc_generated_files/mcc.h" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.30\\pic\\include\\c99\\conio.h" 1 3
 
@@ -8189,19 +8181,47 @@ extern void cputs(const char *);
 # 110 "mcc_generated_files/interrupt_manager.h"
 void INTERRUPT_Initialize (void);
 # 55 "mcc_generated_files/mcc.h" 2
-# 64 "mcc_generated_files/mcc.h"
-float distance;
 
-_Bool triggerFlag;
-# 79 "mcc_generated_files/mcc.h"
+
+# 1 "mcc_generated_files/tmr0.h" 1
+# 100 "mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+# 129 "mcc_generated_files/tmr0.h"
+void TMR0_StartTimer(void);
+# 161 "mcc_generated_files/tmr0.h"
+void TMR0_StopTimer(void);
+# 197 "mcc_generated_files/tmr0.h"
+uint16_t TMR0_ReadTimer(void);
+# 236 "mcc_generated_files/tmr0.h"
+void TMR0_WriteTimer(uint16_t timerVal);
+# 272 "mcc_generated_files/tmr0.h"
+void TMR0_Reload(void);
+# 310 "mcc_generated_files/tmr0.h"
+_Bool TMR0_HasOverflowOccured(void);
+# 57 "mcc_generated_files/mcc.h" 2
+
+
+unsigned char row = 0;
+unsigned char col = 0;
+unsigned char count = 0;
+const char keypad [4] [3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
+_Bool correct_password = 1;
+_Bool button_pressed = 0;
+
+const char password_first = '8';
+const char password_second = '2';
+const char password_third = '1';
+const char password_fourth = '3';
+# 83 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 92 "mcc_generated_files/mcc.h"
+# 96 "mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
 # 30 "mcc_generated_files/ext_int.c" 2
 
 
 void (*INT0_InterruptHandler)(void);
 void (*INT1_InterruptHandler)(void);
+void (*INT2_InterruptHandler)(void);
 
 void INT0_ISR(void)
 {
@@ -8227,7 +8247,12 @@ void INT0_SetInterruptHandler(void (* InterruptHandler)(void)){
 
 void INT0_DefaultInterruptHandler(void){
 
-    TMR0_StartTimer();
+
+    if(!button_pressed){
+        col = 0;
+
+        button_pressed = 1;
+    }
 }
 void INT1_ISR(void)
 {
@@ -8252,11 +8277,44 @@ void INT1_SetInterruptHandler(void (* InterruptHandler)(void)){
 }
 
 void INT1_DefaultInterruptHandler(void){
-    TMR0_StopTimer();
-    distance = TMR0_ReadTimer()/58.0;
-    TMR0_Reload();
-    triggerFlag = 1;
-    _delay((unsigned long)((10)*(4000000/4000.0)));
+
+
+    if(!button_pressed){
+        col = 1;
+
+        button_pressed = 1;
+    }
+}
+void INT2_ISR(void)
+{
+    (INTCON3bits.INT2IF = 0);
+
+
+    INT2_CallBack();
+}
+
+
+void INT2_CallBack(void)
+{
+
+    if(INT2_InterruptHandler)
+    {
+        INT2_InterruptHandler();
+    }
+}
+
+void INT2_SetInterruptHandler(void (* InterruptHandler)(void)){
+    INT2_InterruptHandler = InterruptHandler;
+}
+
+void INT2_DefaultInterruptHandler(void){
+
+
+    if(!button_pressed){
+        col = 2;
+
+        button_pressed = 1;
+    }
 }
 
 void EXT_INT_Initialize(void)
@@ -8274,9 +8332,18 @@ void EXT_INT_Initialize(void)
 
 
     (INTCON3bits.INT1IF = 0);
-    (INTCON2bits.INTEDG1 = 0);
+    (INTCON2bits.INTEDG1 = 1);
 
     INT1_SetInterruptHandler(INT1_DefaultInterruptHandler);
     (INTCON3bits.INT1IE = 1);
+
+
+
+
+    (INTCON3bits.INT2IF = 0);
+    (INTCON2bits.INTEDG2 = 1);
+
+    INT2_SetInterruptHandler(INT2_DefaultInterruptHandler);
+    (INTCON3bits.INT2IE = 1);
 
 }

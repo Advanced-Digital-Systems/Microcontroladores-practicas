@@ -25,12 +25,13 @@
    Section: Includes
  */
 #include <xc.h>
+#include "pin_manager.h"
 #include "ext_int.h"
-#include "tmr0.h"
 #include "mcc.h"
 
 void (*INT0_InterruptHandler)(void);
 void (*INT1_InterruptHandler)(void);
+void (*INT2_InterruptHandler)(void);
 
 void INT0_ISR(void)
 {
@@ -55,8 +56,13 @@ void INT0_SetInterruptHandler(void (* InterruptHandler)(void)){
 }
 
 void INT0_DefaultInterruptHandler(void){
-    // Initialize timer
-    TMR0_StartTimer();
+    // add your INT0 interrupt custom code
+    // or set custom function using INT0_SetInterruptHandler()
+    if(!button_pressed){ // Si un botón no ha sido presionado... (para evitar interrupciones no deseadas)
+        col = 0; // Se detecta la columna que se presionó
+        // Se activan las flags para el main
+        button_pressed = true;
+    }
 }
 void INT1_ISR(void)
 {
@@ -81,11 +87,44 @@ void INT1_SetInterruptHandler(void (* InterruptHandler)(void)){
 }
 
 void INT1_DefaultInterruptHandler(void){
-    TMR0_StopTimer();               // Stop timer
-    distance = TMR0_ReadTimer()/58.0; // Save time value
-    TMR0_Reload();                  // Reload timer
-    triggerFlag = 1;                // Activate trigger flag
-    __delay_ms(10);             // Wait until the sensor can be activated
+    // add your INT1 interrupt custom code
+    // or set custom function using INT1_SetInterruptHandler()
+    if(!button_pressed){ // Si un botón no ha sido presionado... (para evitar interrupciones no deseadas)
+        col = 1; // Se detecta la columna que se presionó
+        // Se activan las flags para el main
+        button_pressed = true;
+    }
+}
+void INT2_ISR(void)
+{
+    EXT_INT2_InterruptFlagClear();
+
+    // Callback function gets called everytime this ISR executes
+    INT2_CallBack();    
+}
+
+
+void INT2_CallBack(void)
+{
+    // Add your custom callback code here
+    if(INT2_InterruptHandler)
+    {
+        INT2_InterruptHandler();
+    }
+}
+
+void INT2_SetInterruptHandler(void (* InterruptHandler)(void)){
+    INT2_InterruptHandler = InterruptHandler;
+}
+
+void INT2_DefaultInterruptHandler(void){
+    // add your INT2 interrupt custom code
+    // or set custom function using INT2_SetInterruptHandler()
+    if(!button_pressed){ // Si un botón no ha sido presionado... (para evitar interrupciones no deseadas)
+        col = 2; // Se detecta la columna que se presionó
+        // Se activan las flags para el main
+        button_pressed = true;
+    }    
 }
 
 void EXT_INT_Initialize(void)
@@ -103,10 +142,19 @@ void EXT_INT_Initialize(void)
     // Clear the interrupt flag
     // Set the external interrupt edge detect
     EXT_INT1_InterruptFlagClear();   
-    EXT_INT1_fallingEdgeSet();    
+    EXT_INT1_risingEdgeSet();    
     // Set Default Interrupt Handler
     INT1_SetInterruptHandler(INT1_DefaultInterruptHandler);
     EXT_INT1_InterruptEnable();      
+
+    
+    // Clear the interrupt flag
+    // Set the external interrupt edge detect
+    EXT_INT2_InterruptFlagClear();   
+    EXT_INT2_risingEdgeSet();    
+    // Set Default Interrupt Handler
+    INT2_SetInterruptHandler(INT2_DefaultInterruptHandler);
+    EXT_INT2_InterruptEnable();      
 
 }
 

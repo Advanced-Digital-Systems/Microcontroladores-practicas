@@ -8017,9 +8017,9 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 50 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/pin_manager.h" 1
-# 329 "mcc_generated_files/pin_manager.h"
+# 410 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 341 "mcc_generated_files/pin_manager.h"
+# 422 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "mcc_generated_files/mcc.h" 2
 
@@ -8148,28 +8148,38 @@ extern void cputs(const char *);
 
 
 # 1 "mcc_generated_files/ext_int.h" 1
-# 406 "mcc_generated_files/ext_int.h"
+# 562 "mcc_generated_files/ext_int.h"
 void EXT_INT_Initialize(void);
-# 428 "mcc_generated_files/ext_int.h"
+# 584 "mcc_generated_files/ext_int.h"
 void INT0_ISR(void);
-# 452 "mcc_generated_files/ext_int.h"
+# 608 "mcc_generated_files/ext_int.h"
 void INT0_CallBack(void);
-# 475 "mcc_generated_files/ext_int.h"
+# 631 "mcc_generated_files/ext_int.h"
 void INT0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 499 "mcc_generated_files/ext_int.h"
+# 655 "mcc_generated_files/ext_int.h"
 extern void (*INT0_InterruptHandler)(void);
-# 523 "mcc_generated_files/ext_int.h"
+# 679 "mcc_generated_files/ext_int.h"
 void INT0_DefaultInterruptHandler(void);
-# 541 "mcc_generated_files/ext_int.h"
+# 697 "mcc_generated_files/ext_int.h"
 void INT1_ISR(void);
-# 565 "mcc_generated_files/ext_int.h"
+# 721 "mcc_generated_files/ext_int.h"
 void INT1_CallBack(void);
-# 588 "mcc_generated_files/ext_int.h"
+# 744 "mcc_generated_files/ext_int.h"
 void INT1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 612 "mcc_generated_files/ext_int.h"
+# 768 "mcc_generated_files/ext_int.h"
 extern void (*INT1_InterruptHandler)(void);
-# 636 "mcc_generated_files/ext_int.h"
+# 792 "mcc_generated_files/ext_int.h"
 void INT1_DefaultInterruptHandler(void);
+# 810 "mcc_generated_files/ext_int.h"
+void INT2_ISR(void);
+# 834 "mcc_generated_files/ext_int.h"
+void INT2_CallBack(void);
+# 857 "mcc_generated_files/ext_int.h"
+void INT2_SetInterruptHandler(void (* InterruptHandler)(void));
+# 881 "mcc_generated_files/ext_int.h"
+extern void (*INT2_InterruptHandler)(void);
+# 905 "mcc_generated_files/ext_int.h"
+void INT2_DefaultInterruptHandler(void);
 # 56 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/tmr0.h" 1
@@ -8190,17 +8200,20 @@ _Bool TMR0_HasOverflowOccured(void);
 # 57 "mcc_generated_files/mcc.h" 2
 
 
+unsigned char row = 0;
+unsigned char col = 0;
+unsigned char count = 0;
+const char keypad [4] [3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
+_Bool correct_password = 1;
+_Bool button_pressed = 0;
 
-
-
-
-
-float distance;
-
-_Bool triggerFlag;
-# 79 "mcc_generated_files/mcc.h"
+const char password_first = '8';
+const char password_second = '2';
+const char password_third = '1';
+const char password_fourth = '3';
+# 83 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 92 "mcc_generated_files/mcc.h"
+# 96 "mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
 # 50 "mcc_generated_files/interrupt_manager.c" 2
 
@@ -8221,6 +8234,10 @@ void __attribute__((picinterrupt(("")))) INTERRUPT_InterruptManager (void)
     else if(INTCON3bits.INT1IE == 1 && INTCON3bits.INT1IF == 1)
     {
         INT1_ISR();
+    }
+    else if(INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1)
+    {
+        INT2_ISR();
     }
     else
     {

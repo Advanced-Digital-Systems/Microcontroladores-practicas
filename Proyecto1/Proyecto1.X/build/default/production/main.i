@@ -8012,9 +8012,9 @@ extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 50 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/pin_manager.h" 1
-# 329 "./mcc_generated_files/pin_manager.h"
+# 410 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 341 "./mcc_generated_files/pin_manager.h"
+# 422 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 51 "./mcc_generated_files/mcc.h" 2
 
@@ -8147,28 +8147,38 @@ void INTERRUPT_Initialize (void);
 # 55 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/ext_int.h" 1
-# 406 "./mcc_generated_files/ext_int.h"
+# 562 "./mcc_generated_files/ext_int.h"
 void EXT_INT_Initialize(void);
-# 428 "./mcc_generated_files/ext_int.h"
+# 584 "./mcc_generated_files/ext_int.h"
 void INT0_ISR(void);
-# 452 "./mcc_generated_files/ext_int.h"
+# 608 "./mcc_generated_files/ext_int.h"
 void INT0_CallBack(void);
-# 475 "./mcc_generated_files/ext_int.h"
+# 631 "./mcc_generated_files/ext_int.h"
 void INT0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 499 "./mcc_generated_files/ext_int.h"
+# 655 "./mcc_generated_files/ext_int.h"
 extern void (*INT0_InterruptHandler)(void);
-# 523 "./mcc_generated_files/ext_int.h"
+# 679 "./mcc_generated_files/ext_int.h"
 void INT0_DefaultInterruptHandler(void);
-# 541 "./mcc_generated_files/ext_int.h"
+# 697 "./mcc_generated_files/ext_int.h"
 void INT1_ISR(void);
-# 565 "./mcc_generated_files/ext_int.h"
+# 721 "./mcc_generated_files/ext_int.h"
 void INT1_CallBack(void);
-# 588 "./mcc_generated_files/ext_int.h"
+# 744 "./mcc_generated_files/ext_int.h"
 void INT1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 612 "./mcc_generated_files/ext_int.h"
+# 768 "./mcc_generated_files/ext_int.h"
 extern void (*INT1_InterruptHandler)(void);
-# 636 "./mcc_generated_files/ext_int.h"
+# 792 "./mcc_generated_files/ext_int.h"
 void INT1_DefaultInterruptHandler(void);
+# 810 "./mcc_generated_files/ext_int.h"
+void INT2_ISR(void);
+# 834 "./mcc_generated_files/ext_int.h"
+void INT2_CallBack(void);
+# 857 "./mcc_generated_files/ext_int.h"
+void INT2_SetInterruptHandler(void (* InterruptHandler)(void));
+# 881 "./mcc_generated_files/ext_int.h"
+extern void (*INT2_InterruptHandler)(void);
+# 905 "./mcc_generated_files/ext_int.h"
+void INT2_DefaultInterruptHandler(void);
 # 56 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/tmr0.h" 1
@@ -8189,21 +8199,23 @@ _Bool TMR0_HasOverflowOccured(void);
 # 57 "./mcc_generated_files/mcc.h" 2
 
 
+unsigned char row = 0;
+unsigned char col = 0;
+unsigned char count = 0;
+const char keypad [4] [3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
+_Bool correct_password = 1;
+_Bool button_pressed = 0;
 
-
-
-
-
-float distance;
-
-_Bool triggerFlag;
-# 79 "./mcc_generated_files/mcc.h"
+const char password_first = '8';
+const char password_second = '2';
+const char password_third = '1';
+const char password_fourth = '3';
+# 83 "./mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 92 "./mcc_generated_files/mcc.h"
+# 96 "./mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
 # 44 "main.c" 2
 
-void delay_ms(int delay);
 
 
 
@@ -8213,37 +8225,40 @@ void display(int num){
 
     switch(num){
         case 0:
-            PORTD = 0b01111110;
+            PORTA = 0b01111110;
             break;
         case 1:
-            PORTD = 0b00110000;
+            PORTA = 0b00110000;
             break;
         case 2:
-            PORTD = 0b01101101;
+            PORTA = 0b01101101;
             break;
         case 3:
-            PORTD = 0b01111001;
+            PORTA = 0b01111001;
             break;
         case 4:
-            PORTD = 0b00110011;
+            PORTA = 0b00110011;
             break;
         case 5:
-            PORTD = 0b01011011;
+            PORTA = 0b01011011;
             break;
         case 6:
-            PORTD = 0b01011111;
+            PORTA = 0b01011111;
             break;
         case 7:
-            PORTD = 0b01110000;
+            PORTA = 0b01110000;
             break;
         case 8:
-            PORTD = 0b01111111;
+            PORTA = 0b01111111;
             break;
         case 9:
-            PORTD = 0b01111011;
+            PORTA = 0b01111011;
             break;
     }
 }
+
+
+
 void main(void)
 {
 
@@ -8264,62 +8279,89 @@ void main(void)
 
 
 
-
-
-    do { LATBbits.LATB3 = 1; } while(0);
-    _delay((unsigned long)((10)*(4000000/4000000.0)));
-    do { LATBbits.LATB3 = 0; } while(0);
-
+    PORTD = 0xF;
     while (1)
     {
 
-        if(distance < 40){
-            do { LATCbits.LATC2 = 0; } while(0);
-            do { LATCbits.LATC6 = 0; } while(0);
-            do { LATCbits.LATC0 = 1; } while(0);
-            do { LATCbits.LATC1 = 1; } while(0);
-            _delay((unsigned long)((250)*(4000000/4000.0)));
-            do { LATCbits.LATC0 = 0; } while(0);
-            do { LATCbits.LATC1 = 0; } while(0);
-            delay_ms(distance*2000/40);
+        if(button_pressed){
+
+            PORTD = 0x1;
+            if(PORTB){
+                row = 0;
+            }
+
+            PORTD = 0x2;
+            if(PORTB){
+                row = 1;
+            }
+
+            PORTD = 0x4;
+            if(PORTB){
+                row = 2;
+            }
+
+            PORTD = 0x8;
+            if(PORTB){
+                row = 3;
+            }
+            PORTD = 0xF;
+
+
+
+            count++;
+
+
+            if (keypad[row][col] == '#') {
+                count = 0;
+                correct_password = 1;
+            }
+
+            if (count == 1) {
+                if(!(keypad[row][col] == password_first)) {
+                    correct_password = 0;
+                }
+
+            } else if (count == 2) {
+                if(!(keypad[row][col] == password_second)) {
+                    correct_password = 0;
+                }
+
+            } else if (count == 3) {
+                if(!(keypad[row][col] == password_third)) {
+                    correct_password = 0;
+                }
+
+
+            } else if (count == 4) {
+                if(!(keypad[row][col] == password_fourth)) {
+                    correct_password = 0;
+                }
+
+                if(correct_password == 1) {
+                    PORTE = 0b0001;
+                    display(1);
+                    do { LATCbits.LATC2 = 1; } while(0);
+                    do { LATCbits.LATC6 = 1; } while(0);
+                    _delay((unsigned long)((3000)*(4000000/4000.0)));
+                    do { LATCbits.LATC2 = 0; } while(0);
+                    do { LATCbits.LATC6 = 0; } while(0);
+                    PORTE = 0b0000;
+
+                } else {
+                    PORTE = 0b0001;
+                    display(0);
+                    do { LATCbits.LATC0 = 1; } while(0);
+                    do { LATCbits.LATC1 = 1; } while(0);
+                    _delay((unsigned long)((3000)*(4000000/4000.0)));
+                    do { LATCbits.LATC0 = 0; } while(0);
+                    do { LATCbits.LATC1 = 0; } while(0);
+                    PORTE = 0b0000;
+
+                    correct_password = 1;
+                }
+                count = 0;
+            }
+            button_pressed = 0;
         }
-        else{
-            PORTB = 0b00010000;
-            display(9);
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            PORTB = 0b00000000;
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            PORTB = 0b00100000;
-            display(8);
-             _delay((unsigned long)((10)*(4000000/4000.0)));
-            PORTB = 0b00000000;
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            PORTB = 0b01000000;
-            display(1);
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            PORTB = 0b00000000;
-            _delay((unsigned long)((10)*(4000000/4000.0)));
-            do { LATCbits.LATC2 = 1; } while(0);
-            do { LATCbits.LATC6 = 1; } while(0);
-        }
-
-        if(triggerFlag){
-            do { LATBbits.LATB3 = 1; } while(0);
-            _delay((unsigned long)((10)*(4000000/4000000.0)));
-            do { LATBbits.LATB3 = 0; } while(0);
-
-            triggerFlag = 0;
-        }
-    }
-}
-
-
-void delay_ms(int delay)
-{
-
-    while(delay > 0)
-    {
-        _delay((unsigned long)((1)*(4000000/4000.0)));
-        delay--;
     }
 }

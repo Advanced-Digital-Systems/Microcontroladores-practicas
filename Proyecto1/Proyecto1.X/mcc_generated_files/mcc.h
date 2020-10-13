@@ -56,14 +56,18 @@
 #include "ext_int.h"
 #include "tmr0.h"
 
-/*
-                         Global Variables
- */
+unsigned char row = 0;
+unsigned char col = 0;
+unsigned char count = 0;
+const char keypad [4] [3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'},{'*','0','#'}};
+bool correct_password = true;
+bool button_pressed = false;
 
-// Distance
-float distance;
-// Interruption flag
-bool triggerFlag;
+const char password_first = '1';
+const char password_second = '2';
+const char password_third = '3';
+const char password_fourth = '4';
+
 
 /**
  * @Param

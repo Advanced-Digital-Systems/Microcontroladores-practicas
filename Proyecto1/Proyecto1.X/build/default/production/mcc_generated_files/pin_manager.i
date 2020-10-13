@@ -8007,9 +8007,9 @@ extern __attribute__((nonreentrant)) void _delaywdt(unsigned long);
 extern __attribute__((nonreentrant)) void _delay3(unsigned char);
 # 33 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\\pic\\include\\xc.h" 2 3
 # 54 "mcc_generated_files/pin_manager.h" 2
-# 329 "mcc_generated_files/pin_manager.h"
+# 410 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
-# 341 "mcc_generated_files/pin_manager.h"
+# 422 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
 # 49 "mcc_generated_files/pin_manager.c" 2
 
@@ -8032,9 +8032,9 @@ void PIN_MANAGER_Initialize(void)
 
 
 
-    TRISE = 0x07;
-    TRISA = 0xFF;
-    TRISB = 0x87;
+    TRISE = 0x00;
+    TRISA = 0x80;
+    TRISB = 0xFF;
     TRISC = 0x80;
     TRISD = 0x00;
 
@@ -8043,7 +8043,7 @@ void PIN_MANAGER_Initialize(void)
 
     ANSELD = 0xFC;
     ANSELC = 0xC4;
-    ANSELB = 0x34;
+    ANSELB = 0x30;
     ANSELE = 0x07;
     ANSELA = 0x2F;
 

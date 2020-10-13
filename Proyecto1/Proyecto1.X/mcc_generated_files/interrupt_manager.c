@@ -66,6 +66,10 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     {
         INT1_ISR();
     }
+    else if(INTCON3bits.INT2IE == 1 && INTCON3bits.INT2IF == 1)
+    {
+        INT2_ISR();
+    }
     else
     {
         //Unhandled Interrupt
