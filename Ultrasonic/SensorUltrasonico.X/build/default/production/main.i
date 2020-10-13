@@ -8274,13 +8274,18 @@ void main(void)
         PORTC = 0b00000001;
         display(decena);
         _delay((unsigned long)((10)*(4000000/4000.0)));
+        PORTD = 0b00000000;
+        _delay((unsigned long)((10)*(4000000/4000.0)));
         PORTC = 0b00000010;
         display(unidad);
          _delay((unsigned long)((10)*(4000000/4000.0)));
+        PORTD = 0b00000000;
+        _delay((unsigned long)((10)*(4000000/4000.0)));
         PORTC = 0b00000100;
         display(decimal);
         _delay((unsigned long)((10)*(4000000/4000.0)));
-
+        PORTD = 0b00000000;
+        _delay((unsigned long)((10)*(4000000/4000.0)));
         if(enabletrigger){
             _delay((unsigned long)((10)*(4000000/4000.0)));
             do { LATBbits.LATB2 = 1; } while(0);

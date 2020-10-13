@@ -8228,6 +8228,7 @@ void display(int num){
             PORTA = 0b01111110;
             break;
         case 1:
+<<<<<<< HEAD
             PORTA = 0b00110000;
             break;
         case 2:
@@ -8238,6 +8239,18 @@ void display(int num){
             break;
         case 4:
             PORTA = 0b00110011;
+=======
+            PORTD = 0b01011011;
+            break;
+        case 2:
+            PORTD = 0b00010111;
+            break;
+        case 3:
+            PORTD = 0b01111110;
+            break;
+        case 4:
+            PORTD = 0b00000000;
+>>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
             break;
         case 5:
             PORTA = 0b01011011;
@@ -8249,10 +8262,17 @@ void display(int num){
             PORTA = 0b01110000;
             break;
         case 8:
+<<<<<<< HEAD
             PORTA = 0b01111111;
             break;
         case 9:
             PORTA = 0b01111011;
+=======
+            PORTD = 0b01001111;
+            break;
+        case 9:
+            PORTD = 0b00110011;
+>>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
             break;
     }
 }
@@ -8363,5 +8383,60 @@ void main(void)
             }
             button_pressed = 0;
         }
+<<<<<<< HEAD
+=======
+        else{
+
+            PORTB = 0b00000000;
+            PORTB = 0b00010000;
+            display(9);
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+            PORTB = 0b00000000;
+            PORTB = 0b00100000;
+            display(8);
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+            PORTB = 0b00000000;
+            PORTB = 0b01000000;
+            display(1);
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+
+            do { LATCbits.LATC2 = 1; } while(0);
+            do { LATCbits.LATC6 = 1; } while(0);
+
+
+            PORTB = 0b00000000;
+            PORTB = 0b00010000;
+            display(2);
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+            PORTB = 0b00000000;
+            PORTB = 0b00100000;
+            display(3);
+             _delay((unsigned long)((10)*(4000000/4000.0)));
+            PORTB = 0b00000000;
+            PORTB = 0b01000000;
+            display(4);
+            _delay((unsigned long)((10)*(4000000/4000.0)));
+
+        }
+
+        if(triggerFlag){
+            do { LATBbits.LATB3 = 1; } while(0);
+            _delay((unsigned long)((10)*(4000000/4000000.0)));
+            do { LATBbits.LATB3 = 0; } while(0);
+
+            triggerFlag = 0;
+        }
+    }
+}
+
+
+void delay_ms(int delay)
+{
+
+    while(delay > 0)
+    {
+        _delay((unsigned long)((1)*(4000000/4000.0)));
+        delay--;
+>>>>>>> 7a45ca942df585b296e2372ced734b251f48bbd8
     }
 }
