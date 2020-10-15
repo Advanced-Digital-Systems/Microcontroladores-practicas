@@ -121,7 +121,7 @@ void main(void)
             }
             PORTD = 0x4;
             if(PORTB){
-                row = 2; 
+                row = 2;
             }
             PORTD = 0x8;
             if(PORTB){
